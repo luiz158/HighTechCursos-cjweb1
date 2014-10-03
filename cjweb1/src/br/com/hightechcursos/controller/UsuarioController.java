@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +30,10 @@ public class UsuarioController extends HttpServlet {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		List<Usuario> lista = usuarioDAO.buscarTodos();
 		
-		PrintWriter saida = response.getWriter();
-		saida.println(lista);
+		request.setAttribute("lista", lista);
+		
+		RequestDispatcher saida = request.getRequestDispatcher("listaUsuario.jsp");
+		saida.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

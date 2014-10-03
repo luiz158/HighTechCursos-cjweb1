@@ -12,6 +12,14 @@ import br.com.hightechcursos.entidades.Usuario;
 public class UsuarioDAO
 {
 	private Connection conn = Conexao.getConnection();
+	
+	public void salvar(Usuario usuario) {
+		if (usuario.getId() != null && usuario.getId() != 0) {
+			alterar(usuario);
+		} else {
+			cadastrar(usuario);
+		}
+	}
 	 
 	public void cadastrar(Usuario usuario) {
 		String sql = "INSERT INTO usuarios (nome, login, senha) VALUES (?, ?, ?)";

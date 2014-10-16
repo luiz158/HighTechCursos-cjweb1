@@ -11,7 +11,7 @@
 
 	<table border="1">
 		<tr bgcolor="#EAEAEA">
-			<th>ID</th> <th>Nome</th> <th>Login</th> <th>Senha</th>
+			<th>ID</th> <th>Nome</th> <th>Login</th> <th>Senha</th> <th>Ação</th>
 		</tr>
 	<%
 		List<Usuario> lista = (List<Usuario>) request.getAttribute("lista");
@@ -23,6 +23,9 @@
 			<td><%= u.getNome()%></td>
 			<td><%= u.getLogin()%></td>
 			<td><%= u.getSenha()%></td>
+			<td><a href="usucontroller.do?acao=exc&id=<%= u.getId() %>"> Excluir </a>
+			|
+			<a href="usucontroller.do?acao=alt&id=<%= u.getId() %>"> Alterar </a></td>
 		</tr>	
 	<%
 		}

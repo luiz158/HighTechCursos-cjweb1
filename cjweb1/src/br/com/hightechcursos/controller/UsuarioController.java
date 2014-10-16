@@ -27,13 +27,39 @@ public class UsuarioController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String acao = request.getParameter("acao");
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		List<Usuario> lista = usuarioDAO.buscarTodos();
 		
-		request.setAttribute("lista", lista);
-		
-		RequestDispatcher saida = request.getRequestDispatcher("listaUsuario.jsp");
-		saida.forward(request, response);
+		if ((acao != null) && (acao.equals("cad"))) {
+			Usuario usuario = new Usuario();
+			usuario.setId(0);
+			usuario.setNome("");
+			usuario.setLogin("");
+			usuario.setSenha("");
+			
+			request.setAttribute("usuario", usuario);
+			RequestDispatcher saida = request.getRequestDispatcher("frmusuario.jsp");
+			saida.forward(request, response);
+		} else if ((acao != null) && (acao.equals("alt"))) {
+			String id = request.getParameter("id");
+			Usuario usuario = usuarioDAO.buscaPorId(Integer.parseInt(id));
+			
+			request.setAttribute("usuario", usuario);
+			RequestDispatcher saida = request.getRequestDispatcher("frmusuario.jsp");
+			saida.forward(request, response);
+		} else if ((acao != null) && (acao.equals("exc"))) {
+			String id = request.getParameter("id");
+			Usuario usuario = new Usuario();
+			usuario.setId(Integer.parseInt(id));
+			usuarioDAO.excluir(usuario);
+		} else if ((acao != null) && (acao.equals("lis"))) {
+			List<Usuario> lista = usuarioDAO.buscarTodos();
+			
+			request.setAttribute("lista", lista);
+			
+			RequestDispatcher saida = request.getRequestDispatcher("listaUsuario.jsp");
+			saida.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

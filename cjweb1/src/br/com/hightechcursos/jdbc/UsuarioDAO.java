@@ -33,7 +33,6 @@ public class UsuarioDAO
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -51,7 +50,6 @@ public class UsuarioDAO
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -66,7 +64,6 @@ public class UsuarioDAO
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,9 +75,10 @@ public class UsuarioDAO
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ResultSet rs = ps.executeQuery();
-			Usuario usuario = new Usuario();			
-			while (rs.next()) {				
+			ResultSet rs = ps.executeQuery();						
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+				
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setLogin(rs.getString("login"));
@@ -91,7 +89,6 @@ public class UsuarioDAO
 			
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -111,6 +108,7 @@ public class UsuarioDAO
 			rs = ps.executeQuery();
 			if (rs.next()) {			
 				usuario = new Usuario();
+				
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setLogin(rs.getString("login"));
@@ -171,6 +169,7 @@ public class UsuarioDAO
 			rs = ps.executeQuery();
 			if (rs.next()) {			
 				usuario = new Usuario();
+				
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setLogin(rs.getString("login"));

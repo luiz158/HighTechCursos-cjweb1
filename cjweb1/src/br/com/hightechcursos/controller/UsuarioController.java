@@ -27,6 +27,7 @@ public class UsuarioController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String acao = request.getParameter("acao");
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
@@ -40,19 +41,28 @@ public class UsuarioController extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			RequestDispatcher saida = request.getRequestDispatcher("frmusuario.jsp");
 			saida.forward(request, response);
-		} else if ((acao != null) && (acao.equals("alt"))) {
+		}
+		else if ((acao != null) && (acao.equals("alt"))) {
+			// Captura parametro da tela
 			String id = request.getParameter("id");
+			// Busca objeto usuário no Banco
 			Usuario usuario = usuarioDAO.buscaPorId(Integer.parseInt(id));
-			
+			//Seta atribo no request com objeto usuário
 			request.setAttribute("usuario", usuario);
+			// Emcaminha objeto usuário para tela
 			RequestDispatcher saida = request.getRequestDispatcher("frmusuario.jsp");
 			saida.forward(request, response);
-		} else if ((acao != null) && (acao.equals("exc"))) {
+		}
+		else if ((acao != null) && (acao.equals("exc"))) {
+			// Captura parametro da tela
 			String id = request.getParameter("id");
 			Usuario usuario = new Usuario();
 			usuario.setId(Integer.parseInt(id));
 			usuarioDAO.excluir(usuario);
-		} else if ((acao != null) && (acao.equals("lis"))) {
+			// Redirecionamento pelo cliente (browser)
+			response.sendRedirect("usucontroller.do?acao=lis");
+		}
+		else if ((acao != null) && (acao.equals("lis"))) {
 			List<Usuario> lista = usuarioDAO.buscarTodos();
 			
 			request.setAttribute("lista", lista);

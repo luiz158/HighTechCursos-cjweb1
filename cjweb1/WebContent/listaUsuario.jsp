@@ -1,35 +1,29 @@
-<%@ page language="java" pageEncoding="UTF-8" session="false"%>
-<%@ page import="java.util.List" %>
-<%@ page import="br.com.hightechcursos.entidades.Usuario" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Trabalhando com Expression Language -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>:: Lista dos Usu√°rios</title>
+<title>:: Lista dos Usu·rios</title>
 </head>
 <body>
-
+	
 	<table border="1">
 		<tr bgcolor="#EAEAEA">
-			<th>ID</th> <th>Nome</th> <th>Login</th> <th>Senha</th> <th>A√ß√£o</th>
+			<th>ID</th> <th>Nome</th> <th>Login</th> <th>Senha</th> <th>AÁ„o</th>
 		</tr>
-	<%
-		List<Usuario> lista = (List<Usuario>) request.getAttribute("lista");
-		
-		for (Usuario u: lista) {			
-	%>
+	
+	<c:forEach items="${requestScope.lista}" var="u">
 		<tr>
-			<td><%= u.getId()%></td>
-			<td><%= u.getNome()%></td>
-			<td><%= u.getLogin()%></td>
-			<td><%= u.getSenha()%></td>
-			<td><a href="usucontroller.do?acao=exc&id=<%= u.getId() %>"> Excluir </a>
+			<td>${u.id}</td>
+			<td>${u.nome}</td>
+			<td>${u.login}</td>
+			<td>${u.senha}</td>
+			<td><a href="usucontroller.do?acao=exc&id=${u.id}"> Excluir </a>
 			|
-			<a href="usucontroller.do?acao=alt&id=<%= u.getId() %>"> Alterar </a></td>
+			<a href="usucontroller.do?acao=alt&id=${u.id}"> Alterar </a></td>
 		</tr>	
-	<%
-		}
-	%>
+	</c:forEach>
 	</table>
 	
 </body>

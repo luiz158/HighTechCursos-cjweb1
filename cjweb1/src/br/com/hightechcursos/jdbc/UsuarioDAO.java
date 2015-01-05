@@ -22,7 +22,7 @@ public class UsuarioDAO
 	}
 	 
 	public void cadastrar(Usuario usuario) {
-		String sql = "INSERT INTO usuarios (nome, login, senha) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO usuarios (nome, login, senha) VALUES (?, ?, md5(?))";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			

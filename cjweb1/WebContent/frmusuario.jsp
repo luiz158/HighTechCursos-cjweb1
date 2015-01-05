@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>:: Formul√°rio de Usu√°rio</title>
+<title>:: Formul·rio de Usu·rio</title>
 </head>
 <body>
 

@@ -38,7 +38,7 @@ public class UsuarioDAO
 	}
 	
 	public void alterar(Usuario usuario) {
-		String sql = "UPDATE usuarios SET nome=?, login=?, senha=? WHERE id=?";
+		String sql = "UPDATE usuarios SET nome=?, login=?, senha=md5(?) WHERE id=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
@@ -135,7 +135,7 @@ public class UsuarioDAO
 			ps.setString(1, "%" + nome + "%");
 			
 			rs = ps.executeQuery();						
-			while (rs.next()) {
+			if (rs.next()) {
 				Usuario usuario = new Usuario();
 				
 				usuario.setId(rs.getInt("id"));
@@ -155,10 +155,15 @@ public class UsuarioDAO
 		return listaUsuario;
 	}
 	
+	/**
+	 * Busca por login e senha de Usuário
+	 * @param u Objeto com login e senha a ser consultado no banco
+	 * @return Null quando não encontra no banco ou um Ponteiro a um objeto usuário completo quando encontra
+	 */
 	public Usuario autenticar(Usuario u) {
+		String sql = "SELECT * FROM usuarios WHERE login=? AND senha=md5(?)";
 		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM usuarios WHERE id=? AND senha=?";
+		ResultSet rs = null;		
 		Usuario usuario = null;
 		
 		try {
@@ -166,10 +171,10 @@ public class UsuarioDAO
 			ps.setString(1, u.getLogin());
 			ps.setString(2, u.getSenha());
 			
-			rs = ps.executeQuery();
-			if (rs.next()) {			
+			rs = ps.executeQuery();	
+			if (rs.next()) {
 				usuario = new Usuario();
-				
+					
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setLogin(rs.getString("login"));

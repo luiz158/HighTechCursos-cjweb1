@@ -8,6 +8,8 @@
 </head>
 <body>
 	
+	<c:import url="includes/menu.jsp"></c:import>
+	
 	<table border="1">
 		<tr bgcolor="#EAEAEA">
 			<th>ID</th> <th>Nome</th> <th>Login</th> <th>Senha</th> <th>Ação</th>

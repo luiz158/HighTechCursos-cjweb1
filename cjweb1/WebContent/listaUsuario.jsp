@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>:: Lista dos Usuários</title>
+
+<script type="text/javascript">
+	function confirmarExclusao(id) {
+		if (window.confirm("Tem certeza que deseja excluir o registro:" + id)) {
+			location.href="usucontroller.do?acao=exc&id=" + id;
+		}
+	}
+</script>
+
 </head>
 <body>
 	
@@ -21,7 +30,7 @@
 			<td>${u.nome}</td>
 			<td>${u.login}</td>
 			<td>${u.senha}</td>
-			<td><a href="usucontroller.do?acao=exc&id=${u.id}"> Excluir </a>
+			<td><a href="javascript:confirmarExclusao(${u.id})"> Excluir </a>
 			|
 			<a href="usucontroller.do?acao=alt&id=${u.id}"> Alterar </a></td>
 		</tr>	

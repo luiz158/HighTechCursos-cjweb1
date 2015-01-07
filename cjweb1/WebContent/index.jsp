@@ -13,5 +13,6 @@
 	
 	<p>Ola! Seja bem vindo ${sessionScope.usuLogado.nome}</p>
 	
+	<img src="images/servletJSPTutorial.png" />
 </body>
 </html>
